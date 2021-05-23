@@ -1,0 +1,39 @@
+#ARQUIVO INDEX
+
+<div class="sidenav">
+         <div class="login-main-text">
+            <h2>Pagina de login</h2>
+            
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form action="login.php" method="POST">
+                  <div class="form-group">
+                     <label>Email</label>
+                     <input type="text" class="form-control" placeholder="Email" name="user_email">
+                  </div>
+                  <div class="form-group">
+                     <label>Senha</label>
+                     <input type="password" class="form-control" placeholder="Password" name="user_passworld">
+                  </div>
+                  <button type="submit" class="btn btn-black">Login</button>
+                  <button class="btn btn-secondary">Register</button>
+               </form>
+            </div>
+         </div>
+      </div>
+      
+  ==============================================================================================================================================
+ 2 - ARQUIVO LOGIN
+ 
+ <?php 
+
+	$name = $_POST['user_email'];
+	$email = $_POST['user_passworld'];
+
+	echo"<h2> Efetuado login com sucesso </h2>";
+
+
+ ?>
