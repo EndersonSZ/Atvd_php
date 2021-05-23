@@ -1,0 +1,123 @@
+1 - Arquivo INDEX.PHP
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title> CADASTRO DE PRODUTOS</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="datatables/dataTables.bootstrap4.min.css">
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-3 jumbotron">
+				<h1 class="text-center"> CADASTRO DE PRODUTOS </h1><hr>
+					<form action="cadastro.php" method="POST">
+						<label> <i class="fa fa-shopping-cart text-danger"></i> Nome produto: </label><br>
+						<input type="text" name="nome_produto" placeholder="Nome produto" class="form-control"><br><br>
+
+						<label> <i class="fa fa-sort-amount-asc fa_custom text-danger"></i> Quantidade </label><br>
+						<input type="" name="Quantidade" placeholder="Quantidade" class="form-control"><br><br>
+
+						<label> <i class="fa fa-money text-danger" aria-hidden="true"></i> Preço </label><br>
+						<input type="text" name="Preço" placeholder="Preço" class="form-control"><br><br>
+
+						
+						<button class="btn btn-primary btn-block btn-lg">
+							<i class="fa fa-plus-square"></i> Adicionar
+						</button>
+					</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+
+======================================================================================================================================
+2 - Cadastro.php
+
+<?php  
+
+	
+	$data = $_POST;
+
+	
+	$data = implode(" - ", $data);
+
+	
+	$file = fopen("cadasters.txt", "a+");
+
+	
+	fwrite($file, $data);
+	fwrite($file, "\n");
+
+	
+	fclose($file);
+
+	
+	header("location: list.php?success=insert_ok");
+
+?>
+==================================================================================================================================
+3 - LIST.PHP
+
+<?php 
+
+	
+	
+	$cadasters = file("cadasters.txt");
+
+ ?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title> CADASTRO DE USUÁRIO </title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="datatables/dataTables.bootstrap4.min.css">
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-2">
+				<table class="table">
+
+					<thead>
+						<th> Nome produto </th>
+						<th> Quantidade </th>
+						<th> Preço </th>
+						
+					
+					</thead>
+					<tbody>
+
+						<?php 
+							
+							foreach ($cadasters as $string) {
+								
+								$string = explode(" - ", $string);
+								echo "<tr>";
+								
+								foreach ($string as $value) {
+									echo "<td>{$value}</td>";
+								}
+								echo "</tr>";
+							} 
+						?>
+
+					</tbody>
+
+				</table>
+				<a href="index.php"><button type="button" class="btn btn-warning">Voltar</button> </a>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
