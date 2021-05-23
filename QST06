@@ -1,0 +1,65 @@
+#Arquivo index.php
+<!DOCTYPE html>
+<html>
+<head>
+	<title>   </title>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+
+</body>
+</html>
+
+<div class="sidenav">
+         <div class="login-main-text">
+            <h2>Lista de usuários</h2>
+            
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form action="login.php" method="GET">
+                  <div class="form-group">
+                     <label>Usuário</label>
+                     <input type="text" class="form-control" placeholder="nome" name="user">
+                  </div>
+                  <div class="form-group">
+                     <label>idade</label>
+                     <input type="text" class="form-control" placeholder="idade" name="idade">
+                  </div>
+                  <div class="form-group">
+                     <label>contato</label>
+                     <input type="text" class="form-control" placeholder="contato" name="contato">
+                  </div>
+
+
+                  <button type="submit" class="btn btn-success">cadastre</button>
+                
+               </form>
+            </div>
+         </div>
+      </div>
+      
+      =====================================================================================================================================
+      #arquivo login.php
+  <?php 
+
+	$data = $_GET;
+
+	# Convertendo os dados em uma string com o separador
+	$data = implode(" - ", $data);
+
+	# Abrindo e Criando o arquivo
+	$file = fopen("cadasters.txt", "a+");
+
+	# Escrevendo os dados no Arquivo
+	fwrite($file, $data);
+	fwrite($file, "\n");
+
+	# Fechando o arquivo
+	fclose($file);
+  
+ ?>
