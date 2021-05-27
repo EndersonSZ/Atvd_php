@@ -1,0 +1,56 @@
+1 - arquivo apis.php
+
+<?php 
+
+	include_once 'Connect.class.php';
+	include_once 'Manager.class.php';
+
+	$manager = new Manager;
+
+	if(isset($_GET['arduino'])){
+
+		$arduino = $manager-> select_common("cursos",null,['nome_curso'=>"arduino"], null);
+
+
+		echo  json_encode($arduino);
+
+		
+		}
+
+ ?>
+ 
+ ==============================================================================================
+ 
+ 2 - arrays.php
+ <php
+ 
+ $arduino = file_get_contents("http://localhost/Curso%20php1/QST06/apis.php?arduino");
+ print_r($arduino); 
+ 
+ ?>
+
+ ===================================================================================================
+3 - Connect.class.php
+
+<?php
+
+	class Connect{
+		
+		public static $instance;
+
+		public function __construct(){
+
+		}
+
+
+		public static function get_instance(){
+			if(!isset(self::$instance)){
+				self::$instance = new PDO('mysql:host=localhost;dbname=utdphponline;', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+				self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				self::$instance->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
+			}
+
+			return self::$instance;
+		}
+	}
+?>
