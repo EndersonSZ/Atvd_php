@@ -1,0 +1,52 @@
+1 - apis.php
+<?php 
+
+	include_once 'Connect.class.php';
+	include_once 'Manager.class.php';
+
+	$manager = new Manager;
+
+	if(isset($_GET['ativo'])){
+
+		$ativo = $manager-> select_common("cursos",null,['Status'=>"ativo"], null);
+
+
+		echo  json_encode($ativo);
+
+			
+	}
+
+
+
+ ?>
+ 2 - arrays.php
+ 
+ <php
+ 
+ $ativo = file_get_contents("http://localhost/Curso%20php1/QST06/apis.php?ativo");
+	print_r($ativo);
+?>
+ 
+3 - connecet.php
+<?php
+
+	class Connect{
+		
+		public static $instance;
+
+		public function __construct(){
+
+		}
+
+
+		public static function get_instance(){
+			if(!isset(self::$instance)){
+				self::$instance = new PDO('mysql:host=localhost;dbname=utdphponline;', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+				self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				self::$instance->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
+			}
+
+			return self::$instance;
+		}
+	}
+?>
